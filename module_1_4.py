@@ -1,4 +1,4 @@
-my_string = input('Ваше имя ')
+my_string = input('Напиши, что в голову пришло')
 print(my_string)
 print(len(my_string))
 print(my_string.upper())
