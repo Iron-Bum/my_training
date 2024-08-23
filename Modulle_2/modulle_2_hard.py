@@ -1,4 +1,6 @@
-place = 20
+import random
+
+place = int(random.uniform(3, 20))
 result = []
 for i in range(1, place):
     if place % i == 0 and place / i != 2:
@@ -11,4 +13,5 @@ for i in range(1, place):
             result.extend(temp_value)
         else:
             break
+print(f'Число в первом поле {place}, ваш пароль: ')
 print(result)
