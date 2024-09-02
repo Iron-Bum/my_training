@@ -6,7 +6,7 @@ def calculate_structure_sum(list_):  # функция сумм всех чисе
         elif isinstance(i, int):
             result += i
         elif isinstance(i, dict):
-            result += calculate_structure_sum(list(i.values())) + calculate_structure_sum(i)
+            result += calculate_structure_sum(list(i.items()))
         else:
             result += calculate_structure_sum(i)
     return result
