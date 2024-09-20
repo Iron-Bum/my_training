@@ -5,7 +5,8 @@ class House:
 
     def go_too(self, new_floor):
         if self.number_of_floors > new_floor > 0:
-            print(new_floor)
+            for i in range(new_floor):
+                print(i + 1)
         else:
             print('Такого этажа не существует')
 
