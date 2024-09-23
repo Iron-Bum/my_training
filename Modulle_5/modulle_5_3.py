@@ -29,28 +29,36 @@ class House:
 
     def __radd__(self, other):
         return self.__add__(other)
+
     def __iadd__(self, other):
         return self.__add__(other)
+
     def __gt__(self, other):
         if isinstance(other, House):
             return self.number_of_floors > other.number_of_floors
         return NotImplemented
+
     def __ge__(self, other):
         if isinstance(other, House):
             return self.number_of_floors >= other.number_of_floors
         return NotImplemented
+
     def __lt__(self, other):
         if isinstance(other, House):
             return self.number_of_floors < other.number_of_floors
         return NotImplemented
+
     def __le__(self, other):
         if isinstance(other, House):
             return self.number_of_floors <= other.number_of_floors
         return NotImplemented
+
     def __ne__(self, other):
         if isinstance(other, House):
             return self.number_of_floors != other.number_of_floors
         return NotImplemented
+
+
 h1 = House('ЖК Эльбрус', 10)
 h2 = House('ЖК Акация', 20)
 print(h1)
