@@ -18,8 +18,8 @@ class House:
 
     def __eq__(self, other):
         if isinstance(other, House):
-            return self.number_of_floors > other.number_of_floors
-        return NotImplemented
+            return self.number_of_floors == other.number_of_floors
+        return self.number_of_floors == other
 
     def __add__(self, other):
         if isinstance(other, int):
@@ -36,27 +36,27 @@ class House:
     def __gt__(self, other):
         if isinstance(other, House):
             return self.number_of_floors > other.number_of_floors
-        return NotImplemented
+        return self.number_of_floors > other
 
     def __ge__(self, other):
         if isinstance(other, House):
             return self.number_of_floors >= other.number_of_floors
-        return NotImplemented
+        return self.number_of_floors >= other
 
     def __lt__(self, other):
         if isinstance(other, House):
             return self.number_of_floors < other.number_of_floors
-        return NotImplemented
+        return self.number_of_floors < other
 
     def __le__(self, other):
         if isinstance(other, House):
             return self.number_of_floors <= other.number_of_floors
-        return NotImplemented
+        return self.number_of_floors <= other
 
     def __ne__(self, other):
         if isinstance(other, House):
             return self.number_of_floors != other.number_of_floors
-        return NotImplemented
+        return self.number_of_floors != other
 
 
 h1 = House('ЖК Эльбрус', 10)
