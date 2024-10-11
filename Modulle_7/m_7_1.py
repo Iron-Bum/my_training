@@ -2,7 +2,6 @@ from pprint import pprint
 
 
 class Shop:
-    products_list = []
     def __init__(self):
         self.__fill_name = 'products.txt'
         name = open(self.__fill_name, 'w')
