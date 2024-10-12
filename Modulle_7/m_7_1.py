@@ -1,27 +1,20 @@
-from pprint import pprint
-
-
 class Shop:
     def __init__(self):
         self.__fill_name = 'products.txt'
-        name = open(self.__fill_name, 'w')
+        name = open(self.__fill_name, 'a+')
         name.close()
 
-    def get_product(self):
-        name = open(self.__fill_name, 'r')
-        file = name.read()
-        name.close()
-        return file
+    def get_products(self):
+        with open(self.__fill_name, 'r') as file:
+            return file.read()
 
     def add(self, *products):
-        for product_ in products:
-            name = open(self.__fill_name, 'a')
-            if product_ in name:
-                name.write(f'\n{product_}')
-                name.close()
+        for product in products:
+            if str(product) in self.get_products():
+                print('такой товар уже есть')
             else:
-                name.write(f'\nтакой продукт ужу существует')
-                name.close()
+                with open(self.__fill_name, 'a') as file:
+                    file.write(f'{str(product)}\n')
 
 
 class Product:
@@ -39,4 +32,8 @@ p1 = Product('Potato', 50.5, 'Vegetables')
 p2 = Product('Spaghetti', 3.4, 'Groceries')
 p3 = Product('Potato', 5.5, 'Vegetables')
 
+print(p2)  # __str__
+
 s1.add(p1, p2, p3)
+
+print(s1.get_products())
