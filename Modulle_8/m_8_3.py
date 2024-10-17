@@ -27,7 +27,7 @@ class Car:
             raise IncorrectCarNumbers('Некорректный тип данных для номеров')
         elif len(numbers) != 6:
             raise IncorrectCarNumbers('Неверная длина номера')
-
+        return True
 
 try:
     first = Car('Model1', 1000000, 'f123dj')
