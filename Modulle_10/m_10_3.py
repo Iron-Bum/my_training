@@ -18,7 +18,6 @@ class Bank:
                 elif self.balance >= 500 and self.lock.locked():
                     self.lock.acquire(blocking=False)
             time.sleep(0.001)
-        print('цикл закончен')
 
     def take(self):
         for _ in range(100):
