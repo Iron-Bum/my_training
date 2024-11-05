@@ -11,27 +11,26 @@ class Bank:
     def deposit(self):
         for _ in range(100):
             temp_num = random.randint(50, 500)
-            with self.lock:
-                if self.balance < 500:
-                    self.balance += temp_num
-                    print(f'Пополнение: {temp_num}. Баланс: {self.balance}')
-                # elif self.balance >= 500:
-                #     self.lock.release()
+            if self.balance < 500:
+                self.balance += temp_num
+                print(f'Пополнение: {temp_num}. Баланс: {self.balance}')
+            elif self.balance >= 500 and self.lock.locked():
+                self.lock.release()
             time.sleep(0.001)
-        print('цикл закончен')
+        print('цикл 1 закончен')
 
     def take(self):
         for _ in range(100):
             temp_num = random.randint(50, 500)
-            with self.lock:
-                print(f'Запрос на {temp_num}.')
-                if temp_num <= self.balance:
-                    self.balance -= temp_num
-                    print(f'Снятие: {temp_num}. Текущий баланс: {self.balance}')
-                else:
-                    print(f'Запрос отклонён, недостаточно средств.')
-                    # self.lock.acquire(blocking=False)
+            print(f'Запрос на {temp_num}.')
+            if temp_num <= self.balance:
+                self.balance -= temp_num
+                print(f'Снятие: {temp_num}. Текущий баланс: {self.balance}')
+            else:
+                print(f'Запрос отклонён, недостаточно средств.')
+                self.lock.acquire(blocking=False)
             time.sleep(0.001)
+        print('Цикл 2 закончен')
 
 
 bk = Bank()
@@ -42,3 +41,4 @@ th2.start()
 th1.join()
 th2.join()
 print(f'Итоговый баланс: {bk.balance}')
+
