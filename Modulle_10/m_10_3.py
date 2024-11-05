@@ -15,9 +15,10 @@ class Bank:
                 if self.balance < 500:
                     self.balance += temp_num
                     print(f'Пополнение: {temp_num}. Баланс: {self.balance}')
-                elif self.balance >= 500 and self.lock.locked():
-                    self.lock.acquire(blocking=False)
+                # elif self.balance >= 500:
+                #     self.lock.release()
             time.sleep(0.001)
+        print('цикл закончен')
 
     def take(self):
         for _ in range(100):
@@ -29,7 +30,7 @@ class Bank:
                     print(f'Снятие: {temp_num}. Текущий баланс: {self.balance}')
                 else:
                     print(f'Запрос отклонён, недостаточно средств.')
-                    self.lock.acquire(blocking=False)
+                    # self.lock.acquire(blocking=False)
             time.sleep(0.001)
 
 
