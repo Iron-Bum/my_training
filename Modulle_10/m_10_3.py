@@ -17,7 +17,6 @@ class Bank:
             elif self.balance >= 500 and self.lock.locked():
                 self.lock.release()
             time.sleep(0.001)
-        print('цикл 1 закончен')
 
     def take(self):
         for _ in range(100):
@@ -30,7 +29,6 @@ class Bank:
                 print(f'Запрос отклонён, недостаточно средств.')
                 self.lock.acquire(blocking=False)
             time.sleep(0.001)
-        print('Цикл 2 закончен')
 
 
 bk = Bank()
@@ -41,4 +39,3 @@ th2.start()
 th1.join()
 th2.join()
 print(f'Итоговый баланс: {bk.balance}')
-
