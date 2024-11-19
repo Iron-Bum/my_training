@@ -1,17 +1,16 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 data = {
-    'Имя': ['Сергей', 'Инна', 'Мила'],
+    'Name': ['Сергей', 'Инна', 'Мила'],
     'Приход': [1400, 990, 730],
     'Уход': [780, 200, 490]
 }
 df = pd.DataFrame(data)
 print(df)
-# df = df.rename(columns={'Имя': 'Name'})
+df = df.rename(columns={'Name': 'Имя'})
 df.at[0, 'Приход'] = 1700
-# df['Итого'] = df['Приход'] - df['Уход']
 print(df)
 df.to_csv('M_11.csv', index=False)
 
@@ -41,3 +40,4 @@ plt.legend()
 # Показать график
 plt.tight_layout()
 plt.show()
+
