@@ -92,9 +92,5 @@ class TournamentTest(TestCase):
         self.assertTrue(results[last_runner] == 'Ник')
 
 
-
-
-
-
 if __name__ == '__main__':
     main()
