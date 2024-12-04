@@ -1,6 +1,7 @@
-import random
+#import random
 
-place = int(random.uniform(3, 20))
+#place = int(random.uniform(3, 20))
+place = 20
 result = ''
 for i in range(place, 0, -1):
     if place % i == 0 and place / i != 2 and place / i != 1:

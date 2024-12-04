@@ -7,10 +7,11 @@ def read_info(name):
     all_data = []
     with open(name, "r") as file:
         line = file.readlines()
-        all_data.append(line)
-    return len(*all_data)
+        ALL_DATA.append(line)
+    return len(*ALL_DATA)
 
 
+ALL_DATA = []
 filenames = [f'file {number}.txt' for number in range(1, 5)]
 
 threads = [threading.Thread(target=read_info, args=(filenames[i],)) for i in range(len(filenames))]
