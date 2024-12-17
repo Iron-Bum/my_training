@@ -18,7 +18,6 @@ kb.add(btn_2)
 
 
 class UserState(StatesGroup):
-    adress = State()
     age = State()
     growth = State()
     weight = State()
