@@ -2,19 +2,27 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 import asyncio
 
-api = '7569583567:AAFMy3kI8XWeJm56ciwEHlAk1eKTtZ85RBg'
+api = ''
 
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
-kb = ReplyKeyboardMarkup(resize_keyboard=True)
-btn_1 = KeyboardButton(text='Расчитать')
-btn_2 = KeyboardButton(text='Информация')
-kb.add(btn_1)
-kb.add(btn_2)
+rkb = ReplyKeyboardMarkup(resize_keyboard=True)
+btn_rkb_1 = KeyboardButton(text='Расчитать')
+btn_rkb_2 = KeyboardButton(text='Информация')
+rkb.add(btn_rkb_1)
+rkb.add(btn_rkb_2)
+
+
+ikb = InlineKeyboardMarkup(resize_keyboard=True)
+btn_ikb_1 = InlineKeyboardButton(text='Расчитать норму калорий', callback_data='calories')
+btn_ikb_2 = InlineKeyboardButton(text='Формула расчёта', callback_data='formula')
+ikb.add(btn_ikb_1)
+ikb.add(btn_ikb_2)
 
 
 class UserState(StatesGroup):
@@ -25,13 +33,25 @@ class UserState(StatesGroup):
 
 @dp.message_handler(commands=['start'])
 async def start(message):
-    await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=kb)
+    await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=rkb)
 
 
 @dp.message_handler(text='Расчитать')
-async def set_age(message):
-    await message.answer('Введите свой возраст.')
+async def main_menu(message):
+    await message.answer('Выберите опцию: ', reply_markup=ikb)
+
+
+@dp.callback_query_handler(text='formula')
+async def get_formulas(call):
+    await call.message.answer('10 х вес (кг) + 6,25 x рост (см) – 5 х возраст (г)')
+    await call.answer()
+
+
+@dp.callback_query_handler(text='calories')
+async def set_age(call):
+    await call.message.answer('Введите свой возраст.')
     await UserState.age.set()
+    await call.answer()
 
 
 @dp.message_handler()
