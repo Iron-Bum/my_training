@@ -13,8 +13,7 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
 btn_1 = KeyboardButton(text='Расчитать')
 btn_2 = KeyboardButton(text='Информация')
-kb.add(btn_1)
-kb.add(btn_2)
+kb.add(btn_1, btn_2)
 
 
 class UserState(StatesGroup):
@@ -35,7 +34,7 @@ async def set_age(message):
 
 
 @dp.message_handler()
-async def hi(message):
+async def all_message(message):
     await message.answer('Введите команду /start, что бы начть общение')
 
 
