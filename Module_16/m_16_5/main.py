@@ -4,6 +4,9 @@ from pydantic import BaseModel
 from typing import Annotated, List
 from fastapi.templating import Jinja2Templates
 
+# uvicorn main:app --reload
+
+
 app = FastAPI()
 templates = Jinja2Templates(directory="template")
 
@@ -32,7 +35,10 @@ async def get_users(user_id: int, request: Request) -> HTMLResponse:
 
 
 @app.post('/user/{username}/{age}')
-async def add_user(username: str, age: int) -> User:
+async def add_user(
+        username: Annotated[str, Path(min_length=3, max_length=20, description="Enter username")],
+        age: Annotated[int, Path(ge=18, le=120, description="Enter you age")]
+) -> User:
     if len(users_db):
         new_id = users_db[-1].user_id + 1
     else:
@@ -43,7 +49,11 @@ async def add_user(username: str, age: int) -> User:
 
 
 @app.put('/user/{user_id}/{username}/{age}')
-async def upd_user(user_id: int, username: str, age: int) -> User:
+async def upd_user(
+        user_id: int,
+        username: Annotated[str, Path(min_length=3, max_length=20, description="Enter username")],
+        age: Annotated[int, Path(ge=18, le=120, description="Enter age")]
+) -> User:
     try:
         for user in users_db:
             if user.user_id == user_id:
